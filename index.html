@@ -57,6 +57,27 @@
       </form>
     </div>
 
+    <!-- Connecting firebase for the backend -->
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDwM6-ASx342B1h7lzivirLJ9NtQPIfbSQ",
+        authDomain: "fir-practise-bb5d8.firebaseapp.com",
+        databaseURL: "https://fir-practise-bb5d8.firebaseio.com",
+        projectId: "fir-practise-bb5d8",
+        storageBucket: "fir-practise-bb5d8.appspot.com",
+        messagingSenderId: "378843747889",
+        appId: "1:378843747889:web:f716d60f4508245f"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      // Initialize the connection
+      const dataBase = firebase.firestore();
+    </script>
+
     <script src="Scripts/chat.js"></script>
     <script src="Scripts/ui.js"></script>
     <script src="Scripts/app.js"></script>
