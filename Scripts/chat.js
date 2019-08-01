@@ -24,13 +24,26 @@ class Chatroom {
     const response = await this.chats.add(chat);
     return response;
   }
+  //   ************************************
+  //   Creating the real-time listener
+  //   ****************************************
+  getChats(callback) {
+    //   'Where', only where the condition is true
+    // Only use == in firestorm
+    this.chats
+      .where("room", "==", this.room)
+      .orderBy("created_at")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            // update the UI
+            callback(change.doc.data());
+          }
+        });
+      });
+  }
 }
 const chatroom = new Chatroom("politics", "Shaun");
-chatroom
-  .addChat("Hello everyone")
-  .then(() => {
-    console.log("Chat added");
-  })
-  .catch(error => {
-    console.log(error);
-  });
+chatroom.getChats(data => {
+  console.log(data);
+});
