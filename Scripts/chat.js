@@ -8,6 +8,7 @@ class Chatroom {
     (this.room = room),
       (this.username = username),
       (this.chats = dataBase.collection("chats"));
+    this.unsub;
   }
   async addChat(message) {
     // format a chat object
@@ -30,7 +31,7 @@ class Chatroom {
   getChats(callback) {
     //   'Where', only where the condition is true
     // Only use == in firestorm
-    this.chats
+    this.unsub = this.chats
       .where("room", "==", this.room)
       .orderBy("created_at")
       .onSnapshot(snapshot => {
@@ -42,8 +43,23 @@ class Chatroom {
         });
       });
   }
+  updateName(username) {
+    this.username = username;
+  }
+  updateRoom(room) {
+    this.room = room;
+    console.log("room updated");
+    if (this.unsub) {
+      this.unsub();
+    }
+  }
 }
-const chatroom = new Chatroom("politics", "Shaun");
-chatroom.getChats(data => {
-  console.log(data);
-});
+
+// setTimeout(() => {
+//   chatroom.updateRoom("general");
+//   chatroom.updateName("Hanna");
+//   chatroom.getChats(data => {
+//     console.log(data);
+//   });
+//   chatroom.addChat("Hello");
+// }, 3000);
