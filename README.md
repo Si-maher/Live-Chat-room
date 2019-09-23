@@ -4,7 +4,7 @@ This app was created using vanilla Javascript and the content was managed by fir
 
 # Preview
 
-![Chatroom -Preview](./src/chatroom.PNG)
+![Chatroom -Preview](./chatroom.PNG)
 
 # Author
 
